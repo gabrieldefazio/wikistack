@@ -6,7 +6,7 @@
   <ul class="list-unstyled">
     <ul>
       {% for page in allPages %}
-      <li><a href="/wiki/{{ page.urlTitle }}">{{ page.title }}</a></li>
+      <li><a href="{{ page.route }}">{{ page.route }}</a></li>
       {% endfor %}
     </ul>
   </ul>

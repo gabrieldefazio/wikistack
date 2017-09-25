@@ -7,23 +7,24 @@ router.get('/', function(req, res, next) {
     res.redirect('/');
 });
 
-router.post('/', function(req, res, next) {
-    console.log(req.body)
-
-    const page = Page.build({
-        title: req.body.title,
-        content: req.body.content,
-        name: req.body.name,
-        email: req.body.email
-    });
-    // User.findOrCreate({
-    //     where:{
-    //         name: req.body.name
-    //     }
-    // })
-    page.save().then((savedPage)=>{
-        res.render('./wikipage', { currentPage: savedPage }) });
+router.post("/", function(req, res, next) {
+    User.findOrCreate({
+        where: {
+            name: req.body.name,
+            email: req.body.email
+        }
+    })
+        .then(function(user) {
+            return Page.create(req.body).then(function(page) {
+                return page.setAuthor(user[0]);
+            });
+        })
+        .then(function(page) {
+            res.redirect(page.route);
+        })
+        .catch(next);
 });
+
 
 router.get('/add', function(req, res, next) {
     res.render('./addpage');
@@ -35,13 +36,9 @@ router.get('/:urlTitle', (req, res, next) =>{
             urlTitle: req.params.urlTitle
         }
     }).then((foundPage) => {
-        console.log(foundPage)
-        res.render('./wikipage', { currentPage: foundPage });
+        if(!foundPage) return next(new Error("That page was not found!"))
+        res.render('./wikipage', { page: foundPage });
     }).catch(next);
-});
-
-router.get('/add', function(req, res, next) {
-
 });
 
 
