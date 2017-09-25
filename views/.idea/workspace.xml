@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0ecca0f2-ad6c-407f-b5d8-b906a555dc77" name="Default" comment="" />
+    <list default="true" id="0ecca0f2-ad6c-407f-b5d8-b906a555dc77" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addpage.html" afterPath="$PROJECT_DIR$/addpage.html" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -13,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -22,7 +24,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-268" />
+    <option name="x" value="-281" />
     <option name="y" value="-1057" />
     <option name="width" value="1920" />
     <option name="height" value="977" />
@@ -81,7 +83,7 @@
     <option name="totallyTimeSpent" value="598000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-268" y="-1057" width="1920" height="977" extended-state="0" />
+    <frame x="-281" y="-1057" width="1920" height="977" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
