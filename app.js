@@ -20,7 +20,7 @@ app.use((err, req, res, next) => {
     res.status(500).send(err.message);
 });
 
-models.db.sync({force: true})
+models.db.sync({force: false})
     .then(function () {
         app.listen(3000, function () {
             console.log('Server is listening on port 3001!');

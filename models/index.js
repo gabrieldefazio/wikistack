@@ -22,6 +22,17 @@ var Page = db.define('page', {
     date: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
+    },
+    tags: {
+        type: Sequelize.ARRAY(Sequelize.TEXT),
+        set: function(value) {
+            let arrayOfTags;
+            if (typeof value === 'string'){
+                arrayOfTags = value.split(',').map((tag) => tag.trim())
+                this.setDataValue('tags', arrayOfTags)
+            }
+            else this.setDataValue('tags', value)
+        }
     }
 }, {
     getterMethods: {
@@ -40,6 +51,17 @@ function getUrlTitle(title){
     else return Math.random().toString(36).substring(2, 7);
 }
 
+Page.findByTag = function(tag){
+    return Page.findAll({
+      where: {
+        tags: {
+          $overlap: ['tag']
+        }
+      }
+    })
+}
+
+
 var User = db.define('user', {
     name: {
         type: Sequelize.STRING,
@@ -53,6 +75,12 @@ var User = db.define('user', {
             isEmail: true
         }
     }
+}, {
+  getterMethods: {
+    route(){
+      return `/user/${this.id}`
+    }
+  }
 });
 
 Page.belongsTo(User, { as: 'author' });

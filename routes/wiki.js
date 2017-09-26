@@ -15,11 +15,12 @@ router.post("/", function(req, res, next) {
         }
     })
         .then(function(user) {
-            return Page.create(req.body).then(function(page) {
+            return Page.create(req.body)
+              .then(function(page) {
                 return page.setAuthor(user[0]);
             });
         })
-        .then(function(page) {
+      .then(function(page) {
             res.redirect(page.route);
         })
         .catch(next);
@@ -30,15 +31,33 @@ router.get('/add', function(req, res, next) {
     res.render('./addpage');
 });
 
+router.get('/search/:tag', (req, res, next) => {
+  Page.findByTag(req.query.tag)
+    .then((page) =>{
+      res.render('index', { page : page })
+    })
+    .catch(next)
+})
+
 router.get('/:urlTitle', (req, res, next) =>{
-    Page.findOne({
-        where: {
-            urlTitle: req.params.urlTitle
-        }
-    }).then((foundPage) => {
-        if(!foundPage) return next(new Error("That page was not found!"))
-        res.render('./wikipage', { page: foundPage });
-    }).catch(next);
+  Page.findOne({
+    where: {
+      urlTitle: req.params.urlTitle
+    },
+    include: [
+      {model: User, as: 'author'}
+    ]
+  })
+    .then(function (page) {
+      if (page === null) {
+        res.status(404).send();
+      } else {
+        res.render('wikipage', {
+          page: page
+        });
+      }
+    })
+    .catch(next);
 });
 
 
